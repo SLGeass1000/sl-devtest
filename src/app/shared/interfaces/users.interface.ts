@@ -29,6 +29,4 @@ export interface IUser {
 	company : ICompany;
 }
 
-export interface IRUsers {
-	users : Array<IUser>;
-}
+export type IRUsers = Array<IUser>;
