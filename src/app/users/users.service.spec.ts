@@ -6,13 +6,11 @@ import { UsersService } from './users.service';
 import { LoggerService } from '../core/logger.service';
 import { HttpService } from '../core/http.service';
 
-import { IRUsers } from './users.interfaces';
+import { IRUsers } from '../shared/interfaces/users.interface';
 import { users } from './users.mock';
 
 function makeUsersData () : IRUsers {
-	return {
-		users : users
-	};
+	return users;
 }
 
 describe('UsersService', () => {
@@ -78,7 +76,7 @@ describe('UsersService', () => {
 
 			usersService.getUserList().subscribe(
 				(data : IRUsers) => {
-					expect(data.users.length).toBe(fakeData.users.length, 'should have expected no. of texture categories');
+					expect(data.length).toBe(fakeData.length, 'should have expected no. of texture categories');
 				}
 			);
 		})));
