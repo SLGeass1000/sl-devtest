@@ -1,0 +1,51 @@
+@import '../../../assets/scss/global.scss';
+
+.usersList {
+	background-color: $color-background-1;
+	border: 1px solid $color-border-1;
+
+	table {
+		width: 100%;
+
+		thead tr {
+			background-color: $color-background-0;
+
+			th:hover {
+				cursor: pointer;
+				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
+			}
+		}
+
+		tbody tr {
+			cursor: pointer;
+
+			&:hover {
+				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
+				background-color: $color-background-0;
+			}
+
+			&:last-child td {
+				border-bottom: none;
+			}
+		}
+
+		th, td {
+			padding: 20px 15px;
+
+			border-collapse: collapse;
+
+			border-bottom: 1px solid $color-border-1;
+
+			text-align: left;
+		}
+
+		th {
+			color: $color-1;
+			text-transform: uppercase;
+		}
+
+		.cNumber {
+			text-align: center;
+		}
+	}
+}

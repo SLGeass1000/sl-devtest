@@ -11,7 +11,7 @@ import { UsersComponent } from './users.component';
 
 /* App Feature - Service */
 import { UsersService } from './users.service';
-import { UserInfoComponent } from './user-info/user-info.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   imports : [
@@ -20,7 +20,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
   ],
   declarations : [
 		UsersComponent,
-		UserInfoComponent
+		UsersListComponent
 	],
 	providers : [
 		UsersService

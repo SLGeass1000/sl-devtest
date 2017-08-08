@@ -1,0 +1,24 @@
+<section class="section">
+	<div class="block usersList">
+		<table>
+			<thead>
+				<tr>
+					<th class="cNumber">ID</th>
+					<th>Username</th>
+					<th>Name</th>
+					<th>Company</th>
+					<th>E-mail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let record of stateUsers">
+					<td class="cNumber">{{record.id}}</td>
+					<td>{{record.username}}</td>
+					<td>{{record.name}}</td>
+					<td>{{record.company.name}}</td>
+					<td class="email">{{record.email}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
