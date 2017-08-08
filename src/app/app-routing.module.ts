@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes : Routes = [
-	{ path: '', redirectTo: '/', pathMatch: 'full' },
+	{ path: '', redirectTo: '/users', pathMatch: 'full' },
+	{ path: 'users', loadChildren: 'app/users/users.module#UsersModule' },
 	{ path: '404', component: NotFoundComponent },
 	{ path: '**', component: NotFoundComponent }
 ];
