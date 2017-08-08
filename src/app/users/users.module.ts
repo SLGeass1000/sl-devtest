@@ -11,6 +11,7 @@ import { UsersComponent } from './users.component';
 
 /* App Feature - Service */
 import { UsersService } from './users.service';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   imports : [
@@ -18,7 +19,8 @@ import { UsersService } from './users.service';
 		UsersRoutingModule
   ],
   declarations : [
-		UsersComponent
+		UsersComponent,
+		UserInfoComponent
 	],
 	providers : [
 		UsersService
