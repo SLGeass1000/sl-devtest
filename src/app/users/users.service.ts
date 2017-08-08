@@ -13,7 +13,7 @@ import { LoggerService } from '../core/logger.service';
 import { HttpService } from '../core/http.service';
 
 /* App Interfaces and Classes */
-import { IRUsers } from './users.interfaces';
+import { IRUsers } from '../shared/interfaces/users.interface';
 
 @Injectable()
 export class UsersService implements OnDestroy {
@@ -32,7 +32,7 @@ export class UsersService implements OnDestroy {
 	getUserList () : Observable<IRUsers | string> {
 		const methodName : string = 'getUserList';
 
-		return this.http.get(Config.gameUrl + '/users', { headers : this.headers })
+		return this.http.get(Config.gameUrl + 'users', { headers : this.headers })
 			.map<Response, IRUsers>((resp : Response) => {
 				return this.httpService.mapData<IRUsers>(resp, this.constructor.name, methodName);
 			})
