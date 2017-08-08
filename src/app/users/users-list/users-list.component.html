@@ -10,8 +10,8 @@
 					<th>E-mail</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr *ngFor="let record of stateUsers">
+			<tbody (click)="onClickSelectUser($event)">
+				<tr *ngFor="let record of stateUsers" [attr.data-id]="record.id">
 					<td class="cNumber">{{record.id}}</td>
 					<td>{{record.username}}</td>
 					<td>{{record.name}}</td>

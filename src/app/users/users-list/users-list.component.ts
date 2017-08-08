@@ -21,8 +21,6 @@ import { IRUsers, IUser } from '../../shared/interfaces/users.interface';
 export class UsersListComponent implements OnInit, OnDestroy {
 	public user : IUser = null;
 
-	@Input('userId') userId : string = '1';
-
 	/* Subscriptions */
 	private subscription : Array<Subscription> = [];
 	/* Redux */
@@ -33,17 +31,34 @@ export class UsersListComponent implements OnInit, OnDestroy {
 							private appActions : AppActions,
 							private logger : LoggerService) { }
 
-  ngOnInit() {
+  ngOnInit () {
 		this.subscription.push(this.stateUsers$.subscribe((data) => {
 			this.stateUsers = data;
 			this.logger.info(`${this.constructor.name} - stateUsers:`, this.stateUsers);
-			if (this.stateUsers) {
-				this.user = this.stateUsers[this.userId];
-			}
 		}));
   }
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
   }
 
+
+	/**
+	 * onClickSelectUser - handle @click event and one call modal window with user info
+	 *
+	 * @kind	 {event}
+	 * @param  {MouseEvent} event
+	 * @return {void}
+	 */
+	onClickSelectUser (event : MouseEvent) : void {
+		const methodName : string = 'onClickSelectUser';
+
+		const el : Element = (<HTMLElement>event.target).closest('tr');
+		if (!el) {
+			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not navigation element');
+			return;
+		}
+		const userId : string = el.getAttribute('data-id').toString();
+		this.logger.info(`${this.constructor.name} - ${methodName}:`, 'userId -', userId);
+		//this.ngRedux.dispatch(this.editorActions.openManagerPanel(panelName));
+	}
 }
