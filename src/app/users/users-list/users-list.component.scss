@@ -7,12 +7,17 @@
 	table {
 		width: 100%;
 
-		thead tr {
-			background-color: $color-background-0;
+		thead th {
+			background-color: $color-2;
 
-			th:hover {
-				cursor: pointer;
+			color: white;
+			text-transform: uppercase;
+
+			&:hover, &.active {
+				background-color: $color-header;
 				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
+
+				cursor: pointer;
 			}
 		}
 
@@ -20,8 +25,8 @@
 			cursor: pointer;
 
 			&:hover {
-				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
 				background-color: $color-background-0;
+				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
 			}
 
 			&:last-child td {
@@ -37,11 +42,6 @@
 			border-bottom: 1px solid $color-border-1;
 
 			text-align: left;
-		}
-
-		th {
-			color: $color-1;
-			text-transform: uppercase;
 		}
 
 		.cNumber {
