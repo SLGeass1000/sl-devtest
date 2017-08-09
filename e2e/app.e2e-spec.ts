@@ -1,7 +1,7 @@
 import { SlDevtestPage } from './app.po';
 
 describe('sl-devtest App', () => {
-  let page: SlDevtestPage;
+  let page : SlDevtestPage;
 
   beforeEach(() => {
     page = new SlDevtestPage();
