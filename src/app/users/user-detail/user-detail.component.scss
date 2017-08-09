@@ -1,0 +1,79 @@
+@import '../../../assets/scss/global.scss';
+
+.modal {
+	box-sizing: border-box;
+	width: 450px;
+
+	top: 50%;
+	left: 50%;
+
+	background-color: $color-background-1;
+	box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
+
+	transform: translate(-50%, -50%);
+
+	.modal-close {
+		display: block;
+
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+
+		position: absolute;
+		z-index: $z-index-modal-c2;
+		top: -6px;
+		right: -6px;
+
+		background-color: $color-2;
+		box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
+
+		cursor: pointer;
+		color: #fff;
+		font-size: 20px;
+		text-align: center;
+
+		transition: background-color 0.15s, box-shadow 0.15s;
+
+		&:hover {
+			background-color: $color-header;
+		}
+	}
+}
+
+header {
+	padding: 20px 0;
+
+	border-bottom: 1px solid $color-border-1;
+
+	h2 {
+		text-align: center;
+	}
+}
+
+article {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 12px 35px;
+
+	border-bottom: 1px solid $color-border-1;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	table {
+		width: 100%;
+
+		font-size: 16px;
+
+		tr td:first-child {
+			width: 120px;
+
+			font-weight: bold;
+			text-align: right;
+		}
+		td {
+			padding: 8px;
+		}
+	}
+}

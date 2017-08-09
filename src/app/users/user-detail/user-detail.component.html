@@ -1,22 +1,100 @@
-<div class="modal">
-	<h1>Account</h1>
-	<div *ngIf="user">
-		<div>Name: {{user.name}}</div>
-		<div>Username: {{user.username}}</div>
-		<div>E-mail: {{user.email}}</div>
-		<div>Phone: {{user.phone}}</div>
-		<div>Website: {{user.website}}</div>
+<div class="modal" *ngIf="user">
+	<a routerLink="/users" class="modal-close">
+		<i class="fa fa-times icon-close" aria-hidden="true"></i>
+	</a>
+	<header>
+		<h2>Account #{{user.id}}</h2>
+	</header>
+	<article>
+		<table>
+			<tbody>
+				<tr>
+					<td>Name:</td>
+					<td>{{user.name}}</td>
+				</tr>
+				<tr>
+					<td>Username:</td>
+					<td>{{user.username}}</td>
+				</tr>
+				<tr>
+					<td>E-mail:</td>
+					<td>{{user.email}}</td>
+				</tr>
+				<tr>
+					<td>Phone:</td>
+					<td>{{user.phone}}</td>
+				</tr>
+				<tr>
+					<td>Website:</td>
+					<td>{{user.website}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<header>
 		<h2>Address</h2>
-		<div>Street: {{user.address.street}}</div>
-		<div>Suite: {{user.address.suite}}</div>
-		<div>City: {{user.address.city}}</div>
-		<div>Zipcode: {{user.address.zipcode}}</div>
-		<h3>Geolocation</h3>
-		<div>Lat: {{user.address.geo.lat}}</div>
-		<div>Lng: {{user.address.geo.lng}}</div>
+	</header>
+	<article>
+		<table>
+			<tbody>
+				<tr>
+					<td>Street:</td>
+					<td>{{user.address.street}}</td>
+				</tr>
+				<tr>
+					<td>Suite:</td>
+					<td>{{user.address.suite}}</td>
+				</tr>
+				<tr>
+					<td>City:</td>
+					<td>{{user.address.city}}</td>
+				</tr>
+				<tr>
+					<td>Zipcode:</td>
+					<td>{{user.address.zipcode}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<header>
+		<h2>Geolocation</h2>
+	</header>
+	<article>
+		<table>
+			<tbody>
+				<tr>
+					<td>Lat:</td>
+					<td>{{user.address.geo.lat}}</td>
+				</tr>
+				<tr>
+					<td>Lng:</td>
+					<td>{{user.address.geo.lng}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
+
+	<header>
 		<h2>Company</h2>
-		<div>Name: {{user.company.name}}</div>
-		<div>Suite: {{user.company.catchPhrase}}</div>
-		<div>Bs: {{user.company.bs}}</div>
-	</div>
+	</header>
+	<article>
+		<table>
+			<tbody>
+				<tr>
+					<td>Name:</td>
+					<td>{{user.company.name}}</td>
+				</tr>
+				<tr>
+					<td>Catch phrase:</td>
+					<td>{{user.company.catchPhrase}}</td>
+				</tr>
+				<tr>
+					<td>Bs:</td>
+					<td>{{user.company.bs}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</article>
 </div>
