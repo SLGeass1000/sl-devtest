@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAction } from '../shared/interfaces/action.interface';
 import { IRUsers } from '../shared/interfaces/users.interface';
+import { IClientCoord } from '../shared/interfaces/app.interface'
 
 @Injectable()
 export class AppActions {
@@ -9,6 +10,7 @@ export class AppActions {
 	static readonly OPEN_PANEL = AppActions.CLASS_NAME + 'OPEN_PANEL';
 	static readonly CLOSE_ACTIVE_MODAL = AppActions.CLASS_NAME + 'CLOSE_ACTIVE_MODAL';
 
+	static readonly SET_CLIENT_COORD = AppActions.CLASS_NAME + 'SET_CLIENT_COORD';
 	static readonly SET_USERS = AppActions.CLASS_NAME + 'SET_USERS';
 	static readonly SET_ACTIVE_USER_ID = AppActions.CLASS_NAME + 'SET_ACTIVE_USER_ID';
 
@@ -34,6 +36,16 @@ export class AppActions {
 	closeActiveModal () : IAction {
     return {
       type : AppActions.CLOSE_ACTIVE_MODAL
+    };
+  }
+
+	/* App */
+	setClientCoord (coord : IClientCoord) : IAction {
+    return {
+      type : AppActions.SET_CLIENT_COORD,
+			payload : {
+				coord : coord
+			}
     };
   }
 
