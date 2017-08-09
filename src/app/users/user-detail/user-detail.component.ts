@@ -44,9 +44,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 			this.stateUsers = data[1];
 			const id : number = +data[0]['id'];
 			if (!isFinite(id) || id < 1) {
+				this.ngRedux.dispatch(this.appActions.setActiveUserId(null));
 				this.router.navigateByUrl('/users');
+				return;
 			}
-			this.user = this.stateUsers[id - 1];
+			this.ngRedux.dispatch(this.appActions.setActiveUserId(id));
+			this.user = this.findUser(this.stateUsers, id);
 			this.logger.info(`${this.constructor.name} - ngOnInit:`, 'UserId -', id);
 		});
 		this.subscription.push(sub);
@@ -55,4 +58,31 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		this.subscription.map((data) => data.unsubscribe());
   }
 
+	/**
+	 * findUser - find user structure with route id
+	 *
+	 * @kind {method}
+	 * @param {Array<IUser>} arr - users list
+	 * @param {number} id - user ID from route
+	 * @return {IUser} - user
+	 */
+	findUser (arr : Array<IUser>, id : number) : IUser {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i].id === id) {
+				return arr[i];
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * onClickCloseModal - handle @click event and one close modal window with user info
+	 *
+	 * @kind {event}
+	 * @return {void}
+	 */
+	onClickCloseModal () : void {
+		this.ngRedux.dispatch(this.appActions.setActiveUserId(null));
+		this.router.navigateByUrl('/users');
+	}
 }
