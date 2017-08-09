@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 /* App Redux and Request */
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +28,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	@select(['state', 'users']) stateUsers$ : Observable<IRUsers>;
 	public stateUsers : IRUsers;
 
-  constructor(private ngRedux : NgRedux<any>,
+  constructor(private router : Router,
+							private ngRedux : NgRedux<any>,
 							private appActions : AppActions,
 							private logger : LoggerService) { }
 
@@ -59,6 +61,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
 		}
 		const userId : string = el.getAttribute('data-id').toString();
 		this.logger.info(`${this.constructor.name} - ${methodName}:`, 'userId -', userId);
-		//this.ngRedux.dispatch(this.editorActions.openManagerPanel(panelName));
+		this.router.navigate(['users', userId]);
 	}
 }
