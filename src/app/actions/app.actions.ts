@@ -10,6 +10,7 @@ export class AppActions {
 	static readonly CLOSE_ACTIVE_MODAL = AppActions.CLASS_NAME + 'CLOSE_ACTIVE_MODAL';
 
 	static readonly SET_USERS = AppActions.CLASS_NAME + 'SET_USERS';
+	static readonly SET_ACTIVE_USER_ID = AppActions.CLASS_NAME + 'SET_ACTIVE_USER_ID';
 
 	/* Modal */
 	openModal (name : string, state : boolean = true) : IAction {
@@ -42,6 +43,14 @@ export class AppActions {
       type : AppActions.SET_USERS,
 			payload : {
 				users : users
+			}
+    };
+  }
+	setActiveUserId (id : number) : IAction {
+    return {
+      type : AppActions.SET_ACTIVE_USER_ID,
+			payload : {
+				id : id
 			}
     };
   }
