@@ -13,6 +13,7 @@ import { LoggerService } from '../../core/logger.service';
 
 /* App Interfaces and Classes */
 import { IRUsers, IUser } from '../../shared/interfaces/users.interface';
+import { IClientCoord } from '../../shared/interfaces/app.interface';
 
 @Component({
 	moduleId : module.id,
@@ -21,6 +22,7 @@ import { IRUsers, IUser } from '../../shared/interfaces/users.interface';
   styleUrls : [ 'users-list.component.scss' ]
 })
 export class UsersListComponent implements OnInit, OnDestroy {
+	public activeField : string = 'id';
 
 	/* Subscriptions */
 	private subscription : Array<Subscription> = [];
@@ -67,6 +69,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
 		}
 		const userId : string = el.getAttribute('data-id').toString();
 		this.logger.info(`${this.constructor.name} - ${methodName}:`, 'userId -', userId);
+
+		const coord : IClientCoord = {
+			x : event.clientX,
+			y : event.clientY
+		};
+		this.ngRedux.dispatch(this.appActions.setClientCoord(coord));
+
 		this.router.navigate(['users', userId]);
 	}
 }
