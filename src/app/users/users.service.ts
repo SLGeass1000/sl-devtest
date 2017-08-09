@@ -29,6 +29,13 @@ export class UsersService implements OnDestroy {
 	ngOnDestroy () {
 	}
 
+
+	/**
+	 * getUserList - get users list from remote server
+	 *
+	 * @method
+	 * @return {Observable<IRUsers|string>}
+	 */
 	getUserList () : Observable<IRUsers | string> {
 		const methodName : string = 'getUserList';
 
