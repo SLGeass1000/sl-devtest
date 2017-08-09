@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "sl",
       "styles": [
-        "assets/scss/styles.scss"
+        "assets/scss/styles.scss",
+				"assets/font-awesome-4.7.0/css/font-awesome.min.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
