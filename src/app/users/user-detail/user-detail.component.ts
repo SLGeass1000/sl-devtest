@@ -43,10 +43,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 			}
 			this.stateUsers = data[1];
 			const id : number = +data[0]['id'];
-			if (!isFinite(id)) {
+			if (!isFinite(id) || id < 1) {
 				this.router.navigateByUrl('/users');
 			}
-			this.user = this.stateUsers[id];
+			this.user = this.stateUsers[id - 1];
 			this.logger.info(`${this.constructor.name} - ngOnInit:`, 'UserId -', id);
 		});
 		this.subscription.push(sub);
