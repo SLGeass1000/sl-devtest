@@ -4,13 +4,12 @@
 	box-sizing: border-box;
 	width: 450px;
 
-	top: 50%;
+	position: absolute;
+	top: 60px;
 	left: 50%;
 
 	background-color: $color-background-1;
 	box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
-
-	transform: translate(-50%, -50%);
 
 	.modal-close {
 		display: block;

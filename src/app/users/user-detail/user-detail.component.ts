@@ -13,6 +13,7 @@ import { LoggerService } from '../../core/logger.service';
 
 /* App Interfaces and Classes */
 import { IRUsers, IUser } from '../../shared/interfaces/users.interface';
+import { IClientCoord } from '../../shared/interfaces/app.interface'
 
 @Component({
 	moduleId : module.id,
@@ -28,6 +29,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	/* Redux */
 	@select(['state', 'users']) stateUsers$ : Observable<IRUsers>;
 	public stateUsers : IRUsers;
+	@select(['state', 'clientCoord']) clientCoord$ : Observable<IClientCoord>;
+	public clientCoord : IClientCoord = null;
 
   constructor(private router : Router,
 							private route : ActivatedRoute,
@@ -53,6 +56,9 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 			this.logger.info(`${this.constructor.name} - ngOnInit:`, 'UserId -', id);
 		});
 		this.subscription.push(sub);
+		sub = this.clientCoord$.subscribe((data) => {
+			this.clientCoord = Object.assign({}, this.clientCoord, data);
+		});
   }
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
