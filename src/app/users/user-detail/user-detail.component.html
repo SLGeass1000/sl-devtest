@@ -1,3 +1,22 @@
-<p>
-  user-detail works!
-</p>
+<div class="modal">
+	<h1>Account</h1>
+	<div *ngIf="user">
+		<div>Name: {{user.name}}</div>
+		<div>Username: {{user.username}}</div>
+		<div>E-mail: {{user.email}}</div>
+		<div>Phone: {{user.phone}}</div>
+		<div>Website: {{user.website}}</div>
+		<h2>Address</h2>
+		<div>Street: {{user.address.street}}</div>
+		<div>Suite: {{user.address.suite}}</div>
+		<div>City: {{user.address.city}}</div>
+		<div>Zipcode: {{user.address.zipcode}}</div>
+		<h3>Geolocation</h3>
+		<div>Lat: {{user.address.geo.lat}}</div>
+		<div>Lng: {{user.address.geo.lng}}</div>
+		<h2>Company</h2>
+		<div>Name: {{user.company.name}}</div>
+		<div>Suite: {{user.company.catchPhrase}}</div>
+		<div>Bs: {{user.company.bs}}</div>
+	</div>
+</div>
