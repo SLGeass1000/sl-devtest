@@ -24,7 +24,7 @@
 		tbody tr {
 			cursor: pointer;
 
-			&:hover {
+			&:hover, &.active {
 				background-color: $color-background-0;
 				box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.27);
 			}
