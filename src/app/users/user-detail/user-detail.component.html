@@ -1,5 +1,5 @@
 <div class="modal" *ngIf="user">
-	<a routerLink="/users" class="modal-close">
+	<a class="modal-close" (click)="onClickCloseModal()">
 		<i class="fa fa-times icon-close" aria-hidden="true"></i>
 	</a>
 	<header>
