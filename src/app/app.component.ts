@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	@select(['modal', 'openModalOverlay']) openModalOverlay$ : Observable<boolean>;
 	@select(['state', 'sid']) sid$ : Observable<string>;
 
-	constructor (private router: Router,
+	constructor (private router : Router,
 							 private ngRedux : NgRedux<IApp>,
 							 private appActions : AppActions,
 						 	 private logger : LoggerService) {
@@ -38,5 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
+	}
+
+	onClickCloseModal () {
+		this.ngRedux.dispatch(this.appActions.closeActiveModal());
 	}
 }
