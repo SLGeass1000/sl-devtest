@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /* App Redux and Request */
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { NgRedux, select } from '@angular-redux/store';
 import { AppActions } from '../../actions/app.actions';
+import 'rxjs/add/operator/combineLatest';
 
 /* App Services */
 import { LoggerService } from '../../core/logger.service';
@@ -20,24 +21,29 @@ import { IRUsers, IUser } from '../../shared/interfaces/users.interface';
   styleUrls : [ 'users-list.component.scss' ]
 })
 export class UsersListComponent implements OnInit, OnDestroy {
-	public user : IUser = null;
 
 	/* Subscriptions */
 	private subscription : Array<Subscription> = [];
 	/* Redux */
 	@select(['state', 'users']) stateUsers$ : Observable<IRUsers>;
 	public stateUsers : IRUsers;
+	@select(['state', 'activeUserId']) activeUserId$ : Observable<number>;
+	public activeUserId : number = null;
 
   constructor(private router : Router,
+							private route : ActivatedRoute,
 							private ngRedux : NgRedux<any>,
 							private appActions : AppActions,
 							private logger : LoggerService) { }
 
   ngOnInit () {
-		this.subscription.push(this.stateUsers$.subscribe((data) => {
-			this.stateUsers = data;
+		let sub : Subscription = null;
+		sub = this.stateUsers$.combineLatest(this.activeUserId$).subscribe((data) => {
+			this.stateUsers = data[0];
 			this.logger.info(`${this.constructor.name} - stateUsers:`, this.stateUsers);
-		}));
+			this.activeUserId = data[1];
+		});
+		this.subscription.push(sub);
   }
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
@@ -47,8 +53,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	/**
 	 * onClickSelectUser - handle @click event and one call modal window with user info
 	 *
-	 * @kind	 {event}
-	 * @param  {MouseEvent} event
+	 * @kind {event}
+	 * @param {MouseEvent} event
 	 * @return {void}
 	 */
 	onClickSelectUser (event : MouseEvent) : void {

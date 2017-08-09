@@ -11,7 +11,8 @@
 				</tr>
 			</thead>
 			<tbody (click)="onClickSelectUser($event)">
-				<tr *ngFor="let record of stateUsers" [attr.data-id]="record.id">
+				<tr *ngFor="let record of stateUsers" [attr.data-id]="record.id"
+					[class.active]="record.id === activeUserId">
 					<td class="cNumber">{{record.id}}</td>
 					<td>{{record.username}}</td>
 					<td>{{record.name}}</td>
