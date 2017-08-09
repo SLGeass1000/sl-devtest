@@ -1,4 +1,4 @@
-<div class="modal" *ngIf="user">
+<div class="modal" *ngIf="user" [style.left.px]="this.clientCoord.x + 5">
 	<a class="modal-close" (click)="onClickCloseModal()">
 		<i class="fa fa-times icon-close" aria-hidden="true"></i>
 	</a>
