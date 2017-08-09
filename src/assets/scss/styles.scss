@@ -15,6 +15,32 @@ body {
 	background-color: $color-background-2;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	color: $color-header;
+}
+
+h1 {
+  font-size: 26px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 22px;
+}
+h4 {
+  font-size: 20px;
+}
+h5 {
+  font-size: 18px;
+}
+h6 {
+  font-size: 16px;
+}
+p, label, input {
+  font-size: 16px;
+}
+
 a, .email {
 	color: $color-1;
 	text-decoration: underline;
@@ -30,4 +56,6 @@ a, .email {
 }
 .modal {
 	position: fixed;
+	z-index: $z-index-modal-block;
+	background-color: $color-background-0;
 }
