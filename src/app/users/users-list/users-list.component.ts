@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 /* App Redux and Request */
 import { Observable } from 'rxjs/Observable';
@@ -33,7 +33,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	public activeUserId : number = null;
 
   constructor(private router : Router,
-							private route : ActivatedRoute,
 							private ngRedux : NgRedux<any>,
 							private appActions : AppActions,
 							private logger : LoggerService) { }
