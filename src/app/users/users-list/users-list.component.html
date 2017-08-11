@@ -4,10 +4,10 @@
 			<thead>
 				<tr>
 					<th class="cNumber" [class.active]="activeField === 'id'">ID</th>
-					<th>Username</th>
-					<th>Name</th>
-					<th>Company</th>
-					<th>E-mail</th>
+					<th [class.active]="activeField === 'username'">Username</th>
+					<th [class.active]="activeField === 'name'">Name</th>
+					<th [class.active]="activeField === 'company'">Company</th>
+					<th [class.active]="activeField === 'email'">E-mail</th>
 				</tr>
 			</thead>
 			<tbody (click)="onClickSelectUser($event)">
@@ -16,7 +16,7 @@
 					<td class="cNumber">{{record.id}}</td>
 					<td>{{record.username}}</td>
 					<td>{{record.name}}</td>
-					<td>{{record.company.name}}</td>
+					<td>{{record.company?.name}}</td>
 					<td class="email">{{record.email}}</td>
 				</tr>
 			</tbody>
