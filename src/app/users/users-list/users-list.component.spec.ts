@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 
 /* Interfaces */
 import { IUser } from '../../shared/interfaces/users.interface';
+import { IAction } from '../../shared/interfaces/action.interface';
 
 /* Components */
 import { UsersListComponent } from './users-list.component';
@@ -20,6 +21,7 @@ import { users } from '../../../testing/users.mock';
 import { AppActions } from '../../actions/app.actions';
 
 class AppActionsStub {
+	setClientCoord () {}
 }
 
 
@@ -58,7 +60,7 @@ describe('UsersListComponent', () => {
 			providers: [
       { provide: Router, useClass: RouterStub },
 			{ provide: NgRedux, useClass: NgReduxStub },
-			{ provide: AppActions, useClass: AppActionsStub },
+			{ provide: AppActions, useClass: AppActions },
 			{ provide: LoggerService, useClass: LoggerServiceStub }
     ]
     })
@@ -74,7 +76,15 @@ describe('UsersListComponent', () => {
 		router = fixture.debugElement.injector.get(Router);
 		spyNavigate = spyOn(router, 'navigate');
   });
-	it('should show empty table', async(() => {
+
+	it('should show empty table before OnInit', async(() => {
+		setMockNgRedux(fixture, 2, users);
+
+		const deUserRecors : Array<DebugElement> = fixture.debugElement.queryAll(By.css('table tbody tr'));
+		expect(deUserRecors.length).toBe(0, 'Number of row (line) table must to equal 0');
+	}));
+
+	it('should show empty table with empty user data (null)', async(() => {
 		setMockNgRedux(fixture, null, null);
 		fixture.detectChanges();
 
@@ -119,5 +129,55 @@ describe('UsersListComponent', () => {
 		const deUser : DebugElement = deUserRecors[0];
 		const elUser : HTMLElement = deUser.nativeElement;
 		expect(+elUser.getAttribute('data-id')).toBe(2, 'Active element must have id 2');
+	}));
+
+	it('should call NgRedux.dispatch and Router.navigate when record is clicked', async(() => {
+		setMockNgRedux(fixture, 2, users);
+		fixture.detectChanges();
+
+		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
+		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
+		const msEvent = {
+			target : deUserRecord.nativeElement
+		};
+		deUserTable.triggerEventHandler('click', msEvent);
+
+		expect(spyDispatch.calls.any()).toBeTruthy('Method dispatch must called');
+		expect(spyNavigate.calls.any()).toBeTruthy('Method navigate must called');
+	}));
+
+	it('should call NgRedux.dispatch with correct args when record is clicked', async(() => {
+		setMockNgRedux(fixture, 2, users);
+		fixture.detectChanges();
+
+		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
+		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
+		const msEvent = {
+			clientX : 13,
+			clientY : 24,
+			target : deUserRecord.nativeElement
+		};
+		deUserTable.triggerEventHandler('click', msEvent);
+
+		const dispatchArg : IAction = spyDispatch.calls.first().args[0];
+		expect(<number>dispatchArg.payload.coord.x).toBe(msEvent.clientX, 'Coords X must match');
+		expect(<number>dispatchArg.payload.coord.y).toBe(msEvent.clientY, 'Coords Y must match');
+	}));
+
+	it('should call Router.navigate with correct args when record is clicked', async(() => {
+		setMockNgRedux(fixture, 2, users);
+		fixture.detectChanges();
+
+		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
+		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
+		const msEvent = {
+			target : deUserRecord.nativeElement
+		};
+		deUserTable.triggerEventHandler('click', msEvent);
+
+		let navigateArg : Array<any> = spyNavigate.calls.first().args[0];
+		navigateArg = navigateArg.map((arg : any) => arg.toString())
+		expect(navigateArg[0]).toBe('users', 'First args must match "users" route');
+		expect(navigateArg[1]).toBe('1', 'Second args must match "1" ID');
 	}));
 });
