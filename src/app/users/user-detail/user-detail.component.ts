@@ -40,12 +40,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit () {
 		let sub : Subscription = null;
-		sub = this.route.params.combineLatest(this.stateUsers$).subscribe((data) => {
+		sub = this.stateUsers$.combineLatest(this.route.paramMap).subscribe((data) => {
 			if (!(data[0] && data[1])) {
 				return;
 			}
-			this.stateUsers = data[1];
-			const id : number = +data[0]['id'];
+			this.stateUsers = data[0];
+			const id : number = +data[1].get('id');
 			if (!isFinite(id) || id < 1) {
 				this.ngRedux.dispatch(this.appActions.setActiveUserId(null));
 				this.router.navigateByUrl('/users');
@@ -56,9 +56,11 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 			this.logger.info(`${this.constructor.name} - ngOnInit:`, 'UserId -', id);
 		});
 		this.subscription.push(sub);
+
 		sub = this.clientCoord$.subscribe((data) => {
 			this.clientCoord = Object.assign({}, this.clientCoord, data);
 		});
+		this.subscription.push(sub);
   }
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
