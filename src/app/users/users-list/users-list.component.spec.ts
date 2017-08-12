@@ -10,20 +10,16 @@ import { IAction } from '../../shared/interfaces/action.interface';
 /* Components */
 import { UsersListComponent } from './users-list.component';
 
+/* Services */
+import { AppActions } from '../../actions/app.actions';
+
 /* Stubs */
 import { Router, RouterStub } from '../../../testing/router.stub';
 import { NgRedux, NgReduxStub } from '../../../testing/redux.stub';
 import { LoggerService, LoggerServiceStub } from '../../../testing/logger.stub';
+
 /* Mocks */
 import { users } from '../../../testing/users.mock';
-
-/* Local stubs */
-import { AppActions } from '../../actions/app.actions';
-
-class AppActionsStub {
-	setClientCoord () {}
-}
-
 
 /**
  * setMockNgRedux - perform setup the redux store for UsersListComponent
@@ -129,6 +125,18 @@ describe('UsersListComponent', () => {
 		const deUser : DebugElement = deUserRecors[0];
 		const elUser : HTMLElement = deUser.nativeElement;
 		expect(+elUser.getAttribute('data-id')).toBe(2, 'Active element must have id 2');
+	}));
+
+	it('should not call NgRedux.dispatch and Router.navigate if event obj doesn\'t transmitted', async(() => {
+		setMockNgRedux(fixture, 2, users);
+		fixture.detectChanges();
+
+		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
+		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
+		deUserTable.triggerEventHandler('click', null);
+
+		expect(spyDispatch.calls.any()).toBeFalsy('Method dispatch must not called');
+		expect(spyNavigate.calls.any()).toBeFalsy('Method navigate must not called');
 	}));
 
 	it('should call NgRedux.dispatch and Router.navigate when record is clicked', async(() => {
