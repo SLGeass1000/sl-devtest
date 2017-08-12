@@ -40,19 +40,19 @@
 			<tbody>
 				<tr>
 					<td>Street:</td>
-					<td>{{user.address.street}}</td>
+					<td>{{user.address?.street}}</td>
 				</tr>
 				<tr>
 					<td>Suite:</td>
-					<td>{{user.address.suite}}</td>
+					<td>{{user.address?.suite}}</td>
 				</tr>
 				<tr>
 					<td>City:</td>
-					<td>{{user.address.city}}</td>
+					<td>{{user.address?.city}}</td>
 				</tr>
 				<tr>
 					<td>Zipcode:</td>
-					<td>{{user.address.zipcode}}</td>
+					<td>{{user.address?.zipcode}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -66,11 +66,11 @@
 			<tbody>
 				<tr>
 					<td>Lat:</td>
-					<td>{{user.address.geo.lat}}</td>
+					<td>{{user.address?.geo?.lat}}</td>
 				</tr>
 				<tr>
 					<td>Lng:</td>
-					<td>{{user.address.geo.lng}}</td>
+					<td>{{user.address?.geo?.lng}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -84,15 +84,15 @@
 			<tbody>
 				<tr>
 					<td>Name:</td>
-					<td>{{user.company.name}}</td>
+					<td>{{user.company?.name}}</td>
 				</tr>
 				<tr>
 					<td>Catch phrase:</td>
-					<td>{{user.company.catchPhrase}}</td>
+					<td>{{user.company?.catchPhrase}}</td>
 				</tr>
 				<tr>
 					<td>Bs:</td>
-					<td>{{user.company.bs}}</td>
+					<td>{{user.company?.bs}}</td>
 				</tr>
 			</tbody>
 		</table>
