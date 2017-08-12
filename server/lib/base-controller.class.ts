@@ -1,8 +1,9 @@
 import { logger } from '../config/logger.config';
+import * as winston from 'winston';
 import * as express from 'express';
 
 export class BaseController {
-	public logger : any;
+	public logger : winston.LoggerInstance;
 
 	constructor () {
 		this.logger = logger;
