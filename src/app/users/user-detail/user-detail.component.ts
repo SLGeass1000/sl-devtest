@@ -86,7 +86,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		const methodName : string = 'onClickCloseModal';
 
 		if (!event || !event.target) {
-			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not navigation element');
+			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not close element');
 			return;
 		}
 		if ((<HTMLElement>event.target).className !== 'modal-overlay') {
@@ -97,7 +97,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 			}
 		}
 
-		console.log(event);
 		this.ngRedux.dispatch(this.appActions.closeActiveModal());
 		this.ngRedux.dispatch(this.appActions.setActiveUserId(null));
 		this.router.navigateByUrl('/users');
