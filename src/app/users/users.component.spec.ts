@@ -82,7 +82,7 @@ describe('UsersComponent', () => {
 		expect(deUserList).not.toBeNull('UserList component must be in the template');
 	});
 
-	it('should have "sl-users-list" component', () => {
+	it('should have "router-outlet" component', () => {
 		const deRouterOutlet : DebugElement = fixture.debugElement.query(By.css('router-outlet'));
 		expect(deRouterOutlet).not.toBeNull('RouterOutlet component must be in the template');
 	});
