@@ -176,4 +176,65 @@ describe('UserDetailComponent', () => {
 		user = users[1];
 		checkUserTemplate(fixture, user);
 	});
+
+	it('should call ngRedux.dispatch 2 times in the OnInit event', async(() => {
+		let argAction : IAction;
+
+		activatedRoute.testParamMap = { id : 2 };
+		setMockNgRedux(fixture, users);
+		fixture.detectChanges();
+
+		expect(spyDispatch.calls.count()).toBe(2);
+		const calls : jasmine.CallInfo[] = spyDispatch.calls.all();
+		const callOpenModal : jasmine.CallInfo = calls[0];
+		const callSetActiveUserId : jasmine.CallInfo = calls[1];
+
+		argAction = (<IAction>callOpenModal.args[0]);
+		expect(argAction.type).toBe('AppActions:OPEN_MODAL');
+		expect(argAction.payload.name).toBe('user-detail');
+		expect(argAction.payload.state).toBeTruthy();
+
+		argAction = (<IAction>callSetActiveUserId.args[0]);
+		expect(argAction.type).toBe('AppActions:SET_ACTIVE_USER_ID');
+		expect(argAction.payload.id).toBe(2);
+	}));
+
+	it('should call ngRedux.dispatch 2 times when close buttun (or ovelay) was clicked', async(() => {
+		activatedRoute.testParamMap = { id : 2 };
+		setMockNgRedux(fixture, users);
+		fixture.detectChanges();
+
+		spyDispatch.calls.reset();
+		const deModalOverlay : DebugElement = fixture.debugElement.query(By.css('.modal-overlay'));
+		deModalOverlay.nativeElement.click();
+		expect(spyDispatch.calls.count()).toBe(2);
+
+		spyDispatch.calls.reset();
+		const deModalClose : DebugElement = fixture.debugElement.query(By.css('.modal-close'));
+		deModalClose.nativeElement.click();
+		expect(spyDispatch.calls.count()).toBe(2);
+	}));
+
+	it('should call ngRedux.dispatch 2 times with correct args when modal is closing', async(() => {
+		let argAction : IAction;
+
+		activatedRoute.testParamMap = { id : 2 };
+		setMockNgRedux(fixture, users);
+		fixture.detectChanges();
+
+		spyDispatch.calls.reset();
+		const deModalClose : DebugElement = fixture.debugElement.query(By.css('.modal-close'));
+		deModalClose.nativeElement.click();
+		expect(spyDispatch.calls.count()).toBe(2);
+		const calls : jasmine.CallInfo[] = spyDispatch.calls.all();
+		const callCloseActiveModal : jasmine.CallInfo = calls[0];
+		const callSetActiveUserId : jasmine.CallInfo = calls[1];
+
+		argAction = (<IAction>callCloseActiveModal.args[0]);
+		expect(argAction.type).toBe('AppActions:CLOSE_ACTIVE_MODAL');
+
+		argAction = (<IAction>callSetActiveUserId.args[0]);
+		expect(argAction.type).toBe('AppActions:SET_ACTIVE_USER_ID');
+		expect(argAction.payload.id).toBeNull();
+	}));
 });
