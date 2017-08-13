@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAction } from '../shared/interfaces/action.interface';
 import { IRUsers } from '../shared/interfaces/users.interface';
-import { IClientCoord } from '../shared/interfaces/app.interface'
 
 @Injectable()
 export class AppActions {
@@ -36,16 +35,6 @@ export class AppActions {
 	closeActiveModal () : IAction {
     return {
       type : AppActions.CLOSE_ACTIVE_MODAL
-    };
-  }
-
-	/* App */
-	setClientCoord (coord : IClientCoord) : IAction {
-    return {
-      type : AppActions.SET_CLIENT_COORD,
-			payload : {
-				coord : coord
-			}
     };
   }
 
