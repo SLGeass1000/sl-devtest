@@ -24,14 +24,16 @@ export class RouterStub {
 export class ActivatedRouteStub {
 
   // ActivatedRoute.paramMap is Observable
-  private subject = new BehaviorSubject(convertToParamMap(this.testParam));
-  public param = this.subject.asObservable();
+	private subject = new BehaviorSubject(convertToParamMap(this.testParamMap));
+  public paramMap = this.subject.asObservable();
 
   // Test parameters
-  private _testParam : ParamMap;
-  get testParam() { return this._testParam; }
-  set testParam(params : {}) {
-    this._testParam = convertToParamMap(params);
-    this.subject.next(this._testParam);
+  private _testParamMap : ParamMap;
+  get testParamMap () {
+		return this._testParamMap;
+	}
+  set testParamMap (params : { [ key : string ] : any }) {
+    this._testParamMap = convertToParamMap(params);
+    this.subject.next(this._testParamMap);
   }
 }
