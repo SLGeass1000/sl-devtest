@@ -37,12 +37,17 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
 	getUserList () {
+		const methodName : string = 'getUserList';
+
 		let sub : Subscription = null;
 		sub = this.usersService.getUserList().subscribe(
 			(data : IRUsers) => {
 				if (data) {
 					this.ngRedux.dispatch(this.appActions.setUsers(data));
 				}
+			},
+			(error : string) => {
+				this.logger.error(`${this.constructor.name} - ${methodName}:`, error);
 			}
 		);
 		this.subscription.push(sub);
