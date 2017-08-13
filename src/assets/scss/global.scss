@@ -12,6 +12,9 @@ $color-background-3 : #e8eaed;
 $color-border-1 : #e6e6e6;
 
 /* z-index */
+
+$z-index-overlay-modal: 15; /* Overlay */
+
 /* Modal */
 $z-index-modal-overlay: 16; /* Overlay */
 $z-index-modal-block: 17; /* Form block */
