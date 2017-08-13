@@ -35,21 +35,6 @@ export const ModalReducer : Reducer<IModal> = (state = INITIAL_STATE, action : I
 			}
 			return modal;
 		}
-		case AppActions.OPEN_PANEL : {
-			const modal = Object.assign({}, state, {
-				openPanelOverlay : action.payload.state,
-				openModalOverlay : false
-			});
-			if (modal.active !== action.payload.name) {
-				modal.active = action.payload.name;
-				modal.open = true;
-			}	else {
-				modal.active = null;
-				modal.open = false;
-				modal.openPanelOverlay = false;
-			}
-			return modal;
-		}
 		case AppActions.CLOSE_ACTIVE_MODAL : {
 			const modal = Object.assign({}, state, {
 				openModalOverlay : false,

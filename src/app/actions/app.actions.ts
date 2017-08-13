@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+
+/* Interfaces */
 import { IAction } from '../shared/interfaces/action.interface';
 import { IRUsers } from '../shared/interfaces/users.interface';
 
@@ -17,15 +19,6 @@ export class AppActions {
 	openModal (name : string, state : boolean = true) : IAction {
     return {
       type : AppActions.OPEN_MODAL,
-			payload : {
-				name : name,
-				state : state
-			}
-    };
-  }
-	openPanel (name : string, state : boolean = true) : IAction {
-    return {
-      type : AppActions.OPEN_PANEL,
 			payload : {
 				name : name,
 				state : state
