@@ -4,10 +4,13 @@ import { Component, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { convertToParamMap, ParamMap, NavigationExtras } from '@angular/router';
 
-/*
-@Component({selector: 'router-outlet', template: ''})
-export class RouterOutletStubComponent { }
-*/
+
+@Component({
+	selector: 'router-outlet', // tslint:disable-line
+	template: ''
+})
+export class RouterOutletStubComponent {
+}
 
 @Injectable()
 export class RouterStub {
@@ -18,7 +21,6 @@ export class RouterStub {
 		;
 	}
 }
-
 
 @Injectable()
 export class ActivatedRouteStub {
