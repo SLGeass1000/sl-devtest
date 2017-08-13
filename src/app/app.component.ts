@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
 /* App Redux and Request */
@@ -21,26 +21,37 @@ import { LoggerService } from './core/logger.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 	private animationState : string = 'open';
+	public scrollHidden : boolean = false;
 
 	/* Redux */
 	private subscription : Array<Subscription> = [];
 	@select(['modal', 'openModalOverlay']) openModalOverlay$ : Observable<boolean>;
+	@select(['modal', 'open']) modalOpen$ : Observable<boolean>;
 	@select(['state', 'sid']) sid$ : Observable<string>;
 
-	constructor (private router : Router,
-							 private ngRedux : NgRedux<IApp>,
-							 private appActions : AppActions,
-						 	 private logger : LoggerService) {
+	constructor(private elementRef: ElementRef,
+							private renderer: Renderer2,
+							private router : Router,
+							private ngRedux : NgRedux<IApp>,
+							private appActions : AppActions,
+						 	private logger : LoggerService) {
 		this.ngRedux.configureStore(AppReducer, INITIAL_STATE, null, []);
 		this.logger.info(`${this.constructor.name}:`, 'Start app Artificial System!');
 	}
 	ngOnInit () {
+		let sub : Subscription;
+		sub = this.modalOpen$.subscribe((data) => {
+			if (data) {
+				this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'overflow-y', 'hidden');
+				this.scrollHidden = true;
+			} else {
+				this.renderer.setStyle(this.elementRef.nativeElement.ownerDocument.body, 'overflow-y', 'scroll');
+				this.scrollHidden = false;
+			}
+		});
+		this.subscription.push(sub);
 	}
 	ngOnDestroy () {
 		this.subscription.map((data) => data.unsubscribe());
-	}
-
-	onClickCloseModal () {
-		this.ngRedux.dispatch(this.appActions.closeActiveModal());
 	}
 }
