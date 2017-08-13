@@ -42,10 +42,8 @@ describe('UsersListComponent', () => {
   let component : UsersListComponent;
   let fixture : ComponentFixture<UsersListComponent>;
 	/* Services */
-	let ngRedux : NgRedux<any>;
 	let router : Router;
 	/* Spys */
-	let spyDispatch : jasmine.Spy;
 	let spyNavigate : jasmine.Spy;
 
   beforeEach(async(() => {
@@ -67,8 +65,6 @@ describe('UsersListComponent', () => {
     fixture = TestBed.createComponent(UsersListComponent);
     component = fixture.componentInstance;
 
-		ngRedux = fixture.debugElement.injector.get(NgRedux);
-		spyDispatch = spyOn(ngRedux, 'dispatch');
 		router = fixture.debugElement.injector.get(Router);
 		spyNavigate = spyOn(router, 'navigate');
   });
@@ -127,7 +123,7 @@ describe('UsersListComponent', () => {
 		expect(+elUser.getAttribute('data-id')).toBe(2, 'Active element must have id 2');
 	}));
 
-	it('should not call NgRedux.dispatch and Router.navigate if event obj doesn\'t transmitted', async(() => {
+	it('should not call Router.navigate if event obj doesn\'t transmitted', async(() => {
 		setMockNgRedux(fixture, 2, users);
 		fixture.detectChanges();
 
@@ -135,41 +131,7 @@ describe('UsersListComponent', () => {
 		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
 		deUserTable.triggerEventHandler('click', null);
 
-		expect(spyDispatch.calls.any()).toBeFalsy('Method dispatch must not called');
 		expect(spyNavigate.calls.any()).toBeFalsy('Method navigate must not called');
-	}));
-
-	it('should call NgRedux.dispatch and Router.navigate when record is clicked', async(() => {
-		setMockNgRedux(fixture, 2, users);
-		fixture.detectChanges();
-
-		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
-		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
-		const msEvent = {
-			target : deUserRecord.nativeElement
-		};
-		deUserTable.triggerEventHandler('click', msEvent);
-
-		expect(spyDispatch.calls.any()).toBeTruthy('Method dispatch must called');
-		expect(spyNavigate.calls.any()).toBeTruthy('Method navigate must called');
-	}));
-
-	it('should call NgRedux.dispatch with correct args when record is clicked', async(() => {
-		setMockNgRedux(fixture, 2, users);
-		fixture.detectChanges();
-
-		const deUserTable : DebugElement = fixture.debugElement.query(By.css('table tbody'));
-		const deUserRecord : DebugElement = deUserTable.query(By.css('tr'));
-		const msEvent = {
-			clientX : 13,
-			clientY : 24,
-			target : deUserRecord.nativeElement
-		};
-		deUserTable.triggerEventHandler('click', msEvent);
-
-		const dispatchArg : IAction = spyDispatch.calls.first().args[0];
-		expect(<number>dispatchArg.payload.coord.x).toBe(msEvent.clientX, 'Coords X must match');
-		expect(<number>dispatchArg.payload.coord.y).toBe(msEvent.clientY, 'Coords Y must match');
 	}));
 
 	it('should call Router.navigate with correct args when record is clicked', async(() => {
@@ -184,7 +146,8 @@ describe('UsersListComponent', () => {
 		deUserTable.triggerEventHandler('click', msEvent);
 
 		let navigateArg : Array<any> = spyNavigate.calls.first().args[0];
-		navigateArg = navigateArg.map((arg : any) => arg.toString())
+		navigateArg = navigateArg.map((arg : any) => arg.toString());
+		expect(spyNavigate.calls.any()).toBeTruthy('Method navigate must called');
 		expect(navigateArg[0]).toBe('users', 'First args must match "users" route');
 		expect(navigateArg[1]).toBe('1', 'Second args must match "1" ID');
 	}));
