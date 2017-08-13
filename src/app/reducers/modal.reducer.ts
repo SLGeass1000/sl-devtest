@@ -25,12 +25,9 @@ export const ModalReducer : Reducer<IModal> = (state = INITIAL_STATE, action : I
 				openModalOverlay : action.payload.state,
 				openPanelOverlay : false
 			});
-			if (modal.active !== null) {
-				modal[modal.active] = false;
-			}
 			if (modal.active !== action.payload.name) {
-				modal[action.payload.name] = true;
 				modal.active = action.payload.name;
+				modal.open = true;
 			}	else {
 				modal.active = null;
 				modal.open = false;
@@ -43,12 +40,9 @@ export const ModalReducer : Reducer<IModal> = (state = INITIAL_STATE, action : I
 				openPanelOverlay : action.payload.state,
 				openModalOverlay : false
 			});
-			if (modal.active !== null) {
-				modal[modal.active] = false;
-			}
 			if (modal.active !== action.payload.name) {
-				modal[action.payload.name] = true;
 				modal.active = action.payload.name;
+				modal.open = true;
 			}	else {
 				modal.active = null;
 				modal.open = false;
@@ -62,8 +56,8 @@ export const ModalReducer : Reducer<IModal> = (state = INITIAL_STATE, action : I
 				openPanelOverlay : false
 			});
 			if (modal.active !== null) {
-				modal[modal.active] = false;
 				modal.active = null;
+				modal.open = false;
 			}
 			return modal;
 		}
