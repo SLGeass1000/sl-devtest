@@ -7,7 +7,7 @@ import { LoggerService } from '../core/logger.service';
 import { HttpService } from '../core/http.service';
 
 import { IRUsers } from '../shared/interfaces/users.interface';
-import { users } from './users.mock';
+import { users } from '../../testing/users.mock';
 
 function makeUsersData () : IRUsers {
 	return users;
