@@ -11,8 +11,12 @@ export class RouterOutletStubComponent { }
 
 @Injectable()
 export class RouterStub {
-	navigateByUrl (url: string) { return url; }
-  navigate(commands: any[], extras?: NavigationExtras) { }
+	navigateByUrl (url : string) {
+		return url;
+	}
+  navigate (commands : Array<any>, extras ?: NavigationExtras) {
+		;
+	}
 }
 
 
