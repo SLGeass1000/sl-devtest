@@ -82,7 +82,23 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	 * @kind {event}
 	 * @return {void}
 	 */
-	onClickCloseModal () : void {
+	onClickCloseModal (event : MouseEvent) : void {
+		const methodName : string = 'onClickCloseModal';
+
+		if (!event || !event.target) {
+			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not navigation element');
+			return;
+		}
+		if ((<HTMLElement>event.target).className !== 'modal-overlay') {
+			const el : Element = (<HTMLElement>event.target).closest('.modal-close');
+			if (!el) {
+				this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not close element');
+				return;
+			}
+		}
+
+		console.log(event);
+		this.ngRedux.dispatch(this.appActions.closeActiveModal());
 		this.ngRedux.dispatch(this.appActions.setActiveUserId(null));
 		this.router.navigateByUrl('/users');
 	}
