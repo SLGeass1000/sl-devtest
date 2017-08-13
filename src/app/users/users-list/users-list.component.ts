@@ -61,6 +61,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	onClickSelectUser (event : MouseEvent) : void {
 		const methodName : string = 'onClickSelectUser';
 
+		if (!event || !event.target) {
+			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not navigation element');
+			return;
+		}
 		const el : Element = (<HTMLElement>event.target).closest('tr');
 		if (!el) {
 			this.logger.info(`${this.constructor.name} - ${methodName}:`, 'Not navigation element');
