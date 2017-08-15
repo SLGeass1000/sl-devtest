@@ -10,7 +10,6 @@
 		"build": "npm run build:client && npm run build:server",
     "test": "ng test --sourcemaps=false",
     "lint": "ng lint && tslint \"server/**/*.ts\"",
-    "e2e": "ng e2e",
     "dev": "npm run build:server && concurrently \"tsc -w -p server\" \"nodemon dist/server/index.js\"",
     "prod": "npm run build && node dist/server/index.js",
     "webpack": "./node_modules/.bin/webpack"
