@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run dev",
+    "start": "node dist/server/index.js",
     "build:client": "ng build -aot -prod",
 		"build:server": "tsc -p server",
 		"build": "npm run build:client && npm run build:server",

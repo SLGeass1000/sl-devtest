@@ -69,10 +69,8 @@ export class Server {
 		this.app.use(cors());
 
 		// Set static files
-		if (config.env === 'production') {
-			logger.info(`${this.constructor.name} - ${methodName}`, 'srcStatic', srcStatic);
-			this.app.use(express.static(srcStatic));
-		}
+		logger.info(`${this.constructor.name} - ${methodName}`, 'srcStatic', srcStatic);
+		this.app.use(express.static(srcStatic));
 	}
 
 	/**
@@ -86,11 +84,9 @@ export class Server {
 		logger.info('Setting routes...');
 
 		this.app.use('/', router);
-		if (config.env === 'production') {
-			this.app.get('/*', (req, res) => {
-				res.sendFile(path.join(`${srcStatic}/index.html`));
-			});
-		}
+		this.app.get('/*', (req, res) => {
+			res.sendFile(path.join(`${srcStatic}/index.html`));
+		});
 	}
 
 	/**
