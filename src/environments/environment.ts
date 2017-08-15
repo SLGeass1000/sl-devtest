@@ -7,6 +7,6 @@ import { IEnvironment } from './environment.interface';
 
 export const environment : IEnvironment = {
   production: false,
-	apiUrl : 'http://jsonplaceholder.typicode.com',
+	apiUrl : 'https://jsonplaceholder.typicode.com',
 	logLevel : 'log'
 };
