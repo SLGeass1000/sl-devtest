@@ -1,11 +1,10 @@
 import { DebugElement } from '@angular/core';
-import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 import { By } from '@angular/platform-browser';
 
 /* Interfaces */
 import { IUser } from '../../shared/interfaces/users.interface';
-import { IAction } from '../../shared/interfaces/action.interface';
 
 /* Components */
 import { UsersListComponent } from './users-list.component';
@@ -52,11 +51,11 @@ describe('UsersListComponent', () => {
 			imports : [ NgReduxTestingModule ],
       declarations: [ UsersListComponent ],
 			providers: [
-      { provide: Router, useClass: RouterStub },
-			{ provide: NgRedux, useClass: NgReduxStub },
-			{ provide: AppActions, useClass: AppActions },
-			{ provide: LoggerService, useClass: LoggerServiceStub }
-    ]
+	      { provide: Router, useClass: RouterStub },
+				{ provide: NgRedux, useClass: NgReduxStub },
+				{ provide: AppActions, useClass: AppActions },
+				{ provide: LoggerService, useClass: LoggerServiceStub }
+	    ]
     })
     .compileComponents();
   }));

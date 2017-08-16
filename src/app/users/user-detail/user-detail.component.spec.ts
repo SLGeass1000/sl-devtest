@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 import { By } from '@angular/platform-browser';
 
@@ -82,12 +82,12 @@ describe('UserDetailComponent', () => {
 			imports : [ NgReduxTestingModule ],
       declarations: [ UserDetailComponent ],
 			providers: [
-      { provide: Router, useClass: RouterStub },
-			{ provide: ActivatedRoute, useValue: activatedRoute },
-			{ provide: NgRedux, useClass: NgReduxStub },
-			{ provide: AppActions, useClass: AppActions },
-			{ provide: LoggerService, useClass: LoggerServiceStub }
-    ]
+	      { provide: Router, useClass: RouterStub },
+				{ provide: ActivatedRoute, useValue: activatedRoute },
+				{ provide: NgRedux, useClass: NgReduxStub },
+				{ provide: AppActions, useClass: AppActions },
+				{ provide: LoggerService, useClass: LoggerServiceStub }
+	    ]
     })
     .compileComponents();
   }));

@@ -1,13 +1,12 @@
 import { DebugElement } from '@angular/core';
-import { async, fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgReduxTestingModule } from '@angular-redux/store/testing';
 import { By } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 
 /* Interfaces */
-import { IUser } from '../shared/interfaces/users.interface';
 import { IAction } from '../shared/interfaces/action.interface';
 
 /* Components */
@@ -42,11 +41,11 @@ describe('UsersComponent', () => {
 				UsersListStubComponent
 			],
 			providers: [
-			{ provide: NgRedux, useClass: NgReduxStub },
-			{ provide: AppActions, useClass: AppActions },
-			{ provide: LoggerService, useClass: LoggerServiceStub },
-			{ provide: UsersService, useClass: UsersServiceStub }
-    ]
+				{ provide: NgRedux, useClass: NgReduxStub },
+				{ provide: AppActions, useClass: AppActions },
+				{ provide: LoggerService, useClass: LoggerServiceStub },
+				{ provide: UsersService, useClass: UsersServiceStub }
+	    ]
     })
     .compileComponents();
   }));
