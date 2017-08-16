@@ -21,6 +21,24 @@ import { LoggerService, LoggerServiceStub } from '../testing/logger.stub';
 /* Mocks */
 // ---
 
+
+/**
+ * setMockNgRedux - perform setup the redux store for AppComponent
+ *
+ * @param {ComponentFixture<T>} fixture - fixture component T
+ * @param {boolean} openModalOverlay - modal overlay is opened?
+ * @param {boolean} openModal - modal is opened?
+ * @return {void}
+ */
+function setMockNgRedux<T>(fixture : ComponentFixture<T>, openModalOverlay : boolean, openModal : boolean) : void {
+	const selActiveUserIdStub = MockNgRedux.getSelectorStub(['modal', 'openModalOverlay']);
+	selActiveUserIdStub.next(openModalOverlay);
+	selActiveUserIdStub.complete();
+	const selUsersStub = MockNgRedux.getSelectorStub(['modal', 'open']);
+	selUsersStub.next(openModal);
+	selUsersStub.complete();
+}
+
 describe('AppComponent', () => {
 	let component : AppComponent;
   let fixture : ComponentFixture<AppComponent>;
@@ -55,12 +73,19 @@ describe('AppComponent', () => {
 		spySetStyle = spyOn(renderer2, 'setStyle');
   });
 
-	/*
-	-- To Develop
-	it('should ', async(() => {
+	it('should open modal with his scroll and hide the native scroll', async(() => {
+		setMockNgRedux(fixture, true, true);
 	  fixture.detectChanges();
 
-	  expect(spyConfigureStore.calls.any()).toBeTruthy('');
+	  expect(spySetStyle.calls.any()).toBeTruthy('');
+		const elRef : ElementRef = fixture.debugElement.injector.get(ElementRef);
+		const setStyleArgs : Array<any> = spySetStyle.calls.first().args;
+		expect(setStyleArgs[0]).toBe(elRef.nativeElement.ownerDocument.body);
+		expect(setStyleArgs[1]).toBe('overflow-y');
+		expect(setStyleArgs[2]).toBe('hidden');
+		expect(component.scrollHidden).toBeTruthy('');
+
+		const deWindow : DebugElement = fixture.debugElement.query(By.css('.overflow-hidden'));
+		expect(deWindow).not.toBeNull('');
 	}));
-	*/
 });
